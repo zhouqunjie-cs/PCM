@@ -1,0 +1,34 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+PCM
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+coverage.txt
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+
+# buf for protobuf
+buf.lock
+
+# idea project
+.idea/
+.vscode/
+
+# remove go sum
+go.sum
+
+# config file
+aksk.conf
+config.yaml
+
+log/
+/go_build_gitlink_org_cn_JCCE_PCM

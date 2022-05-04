@@ -1,0 +1,1016 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "idl/pbecs/ecs.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "EcsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/apis/ecs": {
+      "get": {
+        "summary": "查询ECS全量 - 根据云类型",
+        "operationId": "EcsService_ListEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsListResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "provider",
+            "description": "云名称.\n\n - ali: 0 - 阿里云\n - tencent: 1 - 腾讯云\n - huawei: 2 - 华为云\n - k8s: 3 - K8S\n - harvester: 3 - Harvester",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ali",
+              "tencent",
+              "huawei",
+              "k8s",
+              "harvester"
+            ],
+            "default": "ali"
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/action": {
+      "post": {
+        "summary": "操作ecs(start-stop-restart)",
+        "operationId": "EcsService_ActionEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsActionResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbecsActionReq"
+            }
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/all": {
+      "get": {
+        "summary": "查询所有云的ECS",
+        "operationId": "EcsService_ListEcsAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsListResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/create": {
+      "post": {
+        "summary": "创建ECS",
+        "operationId": "EcsService_CreateEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsCreateEcsResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbecsCreateEcsReq"
+            }
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/createMultiple": {
+      "post": {
+        "summary": "创建多家云ECS",
+        "operationId": "EcsService_CreateMultipleEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsCreateEcsMultipleResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbecsCreateEcsMultipleReq"
+            }
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/delete": {
+      "post": {
+        "summary": "删除ECS",
+        "operationId": "EcsService_DeleteEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsDeleteEcsResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbecsDeleteEcsReq"
+            }
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/detail": {
+      "get": {
+        "summary": "查询ECS明细 - 支持云类型、区域、账户、分页等过滤条件",
+        "operationId": "EcsService_ListEcsDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsListDetailResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "provider",
+            "description": "云名称.\n\n - ali: 0 - 阿里云\n - tencent: 1 - 腾讯云\n - huawei: 2 - 华为云\n - k8s: 3 - K8S\n - harvester: 3 - Harvester",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ali",
+              "tencent",
+              "huawei",
+              "k8s",
+              "harvester"
+            ],
+            "default": "ali"
+          },
+          {
+            "name": "accountName",
+            "description": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "regionId",
+            "description": "区域Id，参考 tenant.proto 中的各个云的区域.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageNumber",
+            "description": "分页相关参数，页码.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": "分页相关参数，每页数量.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "nextToken",
+            "description": "分页相关参数，下一页的token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "namespace",
+            "description": "--------harvester---------\nnamespace.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    },
+    "/apis/ecs/update": {
+      "put": {
+        "summary": "修改ECS",
+        "operationId": "EcsService_UpdateEcs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbecsUpdateEcsResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbecsUpdateEcsReq"
+            }
+          }
+        ],
+        "tags": [
+          "EcsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbecsActionReq": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云名称"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "区域Id，参考 tenant.proto 中的各个云的区域"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "命名空间"
+        },
+        "vmName": {
+          "type": "string",
+          "title": "虚拟机名称"
+        },
+        "actionType": {
+          "$ref": "#/definitions/pbecsActionType",
+          "title": "虚拟机操作状态"
+        }
+      }
+    },
+    "pbecsActionResp": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云名称"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户"
+        },
+        "ecses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbecsEcsInstance"
+          },
+          "title": "Ecs 机器集合"
+        },
+        "finished": {
+          "type": "boolean",
+          "title": "查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询"
+        },
+        "status": {
+          "type": "string",
+          "title": "vm状态"
+        }
+      }
+    },
+    "pbecsActionType": {
+      "type": "string",
+      "enum": [
+        "start",
+        "stop",
+        "restart"
+      ],
+      "default": "start",
+      "description": "- start: 启动\n - stop: 停止\n - restart: 重启",
+      "title": "虚拟机状态操作"
+    },
+    "pbecsCreateEcsMultipleReq": {
+      "type": "object",
+      "properties": {
+        "createEcsReqs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbecsCreateEcsReq"
+          }
+        }
+      },
+      "title": "创建多家云ECS入参"
+    },
+    "pbecsCreateEcsMultipleResp": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "请求ID"
+        },
+        "finished": {
+          "type": "boolean",
+          "title": "查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询"
+        }
+      },
+      "title": "创建多家云ECS返回值"
+    },
+    "pbecsCreateEcsReq": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云类型"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账号名称"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "地域，数据中心"
+        },
+        "imageId": {
+          "type": "string",
+          "title": "镜像id"
+        },
+        "instanceChargeType": {
+          "type": "string",
+          "title": "实例的付费方式"
+        },
+        "instanceType": {
+          "type": "string",
+          "title": "实例的资源规格"
+        },
+        "securityGroupId": {
+          "type": "string",
+          "title": "安全组id"
+        },
+        "vSwitchId": {
+          "type": "string",
+          "title": "交换机id"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "实例名称"
+        },
+        "description": {
+          "type": "string",
+          "title": "实例描述"
+        },
+        "zoneId": {
+          "type": "string",
+          "title": "可用区id"
+        },
+        "systemDisk": {
+          "$ref": "#/definitions/pbecsSystemDisk",
+          "title": "系统磁盘"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "创建ECS的数量"
+        },
+        "dryRun": {
+          "type": "string",
+          "title": "预检此次请求,为true时请求通过，则返回 Request validation has been passed with DryRun flag set"
+        },
+        "category": {
+          "type": "string",
+          "title": "数据盘N的云盘种类。取值范围：cloud_efficiency：高效云盘；cloud_ssd：SSD云盘；cloud_essd：ESSD云盘；cloud：普通云盘。"
+        },
+        "internetChargeType": {
+          "$ref": "#/definitions/pbecsInternetChargeType",
+          "title": "网络计费类型。取值范围：PayByBandwidth：按固定带宽计费。PayByTraffic（默认）：按使用流量计费"
+        },
+        "internetMaxBandwidthOut": {
+          "type": "integer",
+          "format": "int32",
+          "title": "公网入带宽最大值，单位为Mbit/s。创建的实例如果参数InternetMaxBandwidthOut的值大于0，则自动为实例分配公网IP。"
+        },
+        "vpcId": {
+          "type": "string",
+          "title": "vpc id 华为云必需"
+        },
+        "subnetId": {
+          "type": "string",
+          "title": "待创建云服务器所在的子网信息。需要指定vpcid对应VPC下已创建的子网（subnet）的网络ID，UUID格式。华为云必需"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "-------------harvester---------------\n命名空间"
+        },
+        "cpu": {
+          "type": "integer",
+          "format": "int32",
+          "title": "vCpu"
+        },
+        "memory": {
+          "type": "string",
+          "title": "memory"
+        },
+        "sshKey": {
+          "type": "string",
+          "title": "ssh_key"
+        },
+        "diskName": {
+          "type": "string",
+          "title": "diskName"
+        },
+        "diskType": {
+          "type": "string",
+          "title": "disk类型 disk,cd-rom"
+        },
+        "diskSize": {
+          "type": "string",
+          "title": "卷大小"
+        },
+        "bus": {
+          "type": "string",
+          "description": "bus 总线指示要模拟的磁盘设备的类型，支持virtio, sata, scsi."
+        },
+        "networkName": {
+          "type": "string",
+          "title": "网络名称"
+        },
+        "networkModel": {
+          "type": "string",
+          "description": "network_model 网络模式，支持e1000, e1000e, ne2k_pci, pcnet, rtl8139, virtio."
+        },
+        "network": {
+          "type": "string",
+          "title": "网络"
+        },
+        "networkType": {
+          "type": "string",
+          "title": "网络连接方法，默认bridge"
+        },
+        "osType": {
+          "type": "string",
+          "title": "osType //系统类型"
+        },
+        "machineType": {
+          "type": "string",
+          "title": "machineType //机器类型 none、q35、pc"
+        },
+        "machineName": {
+          "type": "string",
+          "title": "machineName //主机名称，默认为虚拟机名称"
+        },
+        "userDataTemplate": {
+          "type": "string",
+          "title": "userDataTemplate //用户数据模板"
+        },
+        "networkDataTemplate": {
+          "type": "string",
+          "title": "networkDataTemplate //网络数据模板"
+        },
+        "vmTemplateName": {
+          "type": "string",
+          "title": "vmTemplateName //模板名称"
+        },
+        "vmTemplateVersion": {
+          "type": "string",
+          "title": "vmTemplateVersion //版本号"
+        }
+      },
+      "title": "创建ECS入参"
+    },
+    "pbecsCreateEcsResp": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云名称"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "区域Id，参考 tenant.proto 中的各个云的区域"
+        },
+        "requestId": {
+          "type": "string",
+          "title": "请求ID"
+        },
+        "orderId": {
+          "type": "string",
+          "title": "订单id"
+        },
+        "tradePrice": {
+          "type": "number",
+          "format": "float",
+          "title": "订单成交价"
+        },
+        "instanceIdSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "实例ID（InstanceIdSet）列表"
+        },
+        "finished": {
+          "type": "boolean",
+          "title": "查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询"
+        }
+      },
+      "title": "创建ECS返回值"
+    },
+    "pbecsDeleteEcsReq": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云类型"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账号名称"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "地域，数据中心"
+        },
+        "dryRun": {
+          "type": "string",
+          "title": "是否只预检此次请求是否只预检此次请求。true：发送检查请求，不会查询资源状况。检查项包括AccessKey是否有效、RAM用户的授权情况和是否填写了必需参数。如果检查不通过，则返回对应错误。如果检查通过，会返回错误码DRYRUN.SUCCESS。\nfalse（默认值）：发送正常请求，通过检查后返回2XX HTTP状态码并直接查询资源状况。"
+        },
+        "force": {
+          "type": "string",
+          "title": "Force是否强制释放**运行中**；true：强制释放运行中（Running）的实例。强制释放相当于断电，实例内存以及存储中的临时数据都会被擦除，无法恢复。\nfalse（默认值）：正常释放实例，此时实例必须处于已停止（Stopped）状态"
+        },
+        "terminateSubscription": {
+          "type": "string",
+          "title": "是否释放已到期的包年包月实例 true,false"
+        },
+        "instanceIds": {
+          "type": "string",
+          "title": "实例ID数组以”,“分割。列：i-8vb2nlubkow0fxbq2218,i-8vb2nlubkow0fxbq2216"
+        },
+        "deletePublicip": {
+          "type": "string",
+          "title": "配置删除云服务器是否删除云服务器绑定的弹性IP。如果选择不删除，则系统仅做解绑定操作，保留弹性IP资源。\n取值为true或false。默认false；华为云"
+        },
+        "deleteVolume": {
+          "type": "string",
+          "title": "配置删除云服务器是否删除云服务器对应的数据盘，如果选择不删除，则系统仅做卸载操作，保留云硬盘资源。默认为false。\n取值为true或false。默认false；华为云"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "----------------harvester----------------\n虚拟机名称"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "namespace"
+        },
+        "diskName": {
+          "type": "string",
+          "title": "diskName,以“,” 分割"
+        }
+      },
+      "title": "删除ECS入参"
+    },
+    "pbecsDeleteEcsResp": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云名称"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "区域Id，参考 tenant.proto 中的各个云的区域"
+        },
+        "requestId": {
+          "type": "string",
+          "title": "请求ID"
+        }
+      },
+      "title": "删除ECS返回值"
+    },
+    "pbecsEcsInstance": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云类型"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账号名称"
+        },
+        "instanceId": {
+          "type": "string",
+          "title": "实例id"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "实例名称"
+        },
+        "regionName": {
+          "type": "string",
+          "title": "地域，数据中心"
+        },
+        "publicIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "公网ip"
+        },
+        "instanceType": {
+          "type": "string",
+          "title": "实例类型"
+        },
+        "cpu": {
+          "type": "string",
+          "title": "vcpu数"
+        },
+        "memory": {
+          "type": "string",
+          "title": "内存MB"
+        },
+        "description": {
+          "type": "string",
+          "title": "实例描述"
+        },
+        "status": {
+          "type": "string",
+          "title": "状态"
+        },
+        "creationTime": {
+          "type": "string",
+          "title": "创建时间，ISO8601"
+        },
+        "expireTime": {
+          "type": "string",
+          "title": "过期时间"
+        },
+        "innerIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "内网ip"
+        },
+        "vpcId": {
+          "type": "string",
+          "title": "vpc id"
+        },
+        "resourceGroupId": {
+          "type": "string",
+          "title": "资源组id"
+        },
+        "instanceChargeType": {
+          "type": "string",
+          "title": "收费类型"
+        },
+        "node": {
+          "type": "string",
+          "title": "-----------harvester---------\n虚拟机所在的节点"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "namespace"
+        }
+      },
+      "title": "ECS 实例"
+    },
+    "pbecsInternetChargeType": {
+      "type": "string",
+      "enum": [
+        "PayByBandwidth",
+        "PayByTraffic"
+      ],
+      "default": "PayByBandwidth",
+      "description": "- PayByBandwidth: 按固定带宽计费。\n - PayByTraffic: （默认）：按使用流量计费",
+      "title": "网络计费类型"
+    },
+    "pbecsListDetailResp": {
+      "type": "object",
+      "properties": {
+        "ecses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbecsEcsInstance"
+          },
+          "title": "Ecs 机器集合"
+        },
+        "finished": {
+          "type": "boolean",
+          "title": "查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询"
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "title": "分页相关参数，页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "title": "分页相关参数，每页数量"
+        },
+        "nextToken": {
+          "type": "string",
+          "title": "分页相关参数，下一页的token"
+        },
+        "requestId": {
+          "type": "string",
+          "title": "请求id，出现问题后提供给云厂商，排查问题"
+        }
+      },
+      "title": "查询ECS返回值"
+    },
+    "pbecsListResp": {
+      "type": "object",
+      "properties": {
+        "ecses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbecsEcsInstance"
+          },
+          "title": "Ecs 机器集合"
+        }
+      }
+    },
+    "pbecsSystemDisk": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "title": "系统盘大小，单位为GiB。取值范围：20~500。该参数的取值必须大于或者等于max{20, ImageSize}。默认值：max{40, 参数ImageId对应的镜像大小}"
+        },
+        "category": {
+          "type": "string",
+          "title": "系统盘类型。系统盘的云盘种类。取值范围：cloud_efficiency：高效云盘。cloud_ssd：SSD云盘。cloud_essd：ESSD云盘。cloud：普通云盘。"
+        },
+        "diskName": {
+          "type": "string",
+          "title": "系统盘名称"
+        },
+        "description": {
+          "type": "string",
+          "title": "系统盘描述"
+        },
+        "performanceLevel": {
+          "type": "string",
+          "title": "创建ESSD云盘作为系统盘使用时，设置云盘的性能等级。取值范围：PL0：单盘最高随机读写IOPS 1万。PL1（默认）：单盘最高随机读写IOPS 5万。PL2：单盘最高随机读写IOPS 10万。PL3：单盘最高随机读写IOPS 100万。"
+        },
+        "autoSnapshotPolicyId": {
+          "type": "string",
+          "title": "系统盘采用的自动快照策略ID。"
+        }
+      },
+      "title": "系统磁盘"
+    },
+    "pbecsUpdateEcsReq": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云类型"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账号名称"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "地域，数据中心"
+        },
+        "instanceIds": {
+          "type": "string",
+          "title": "实例id"
+        },
+        "password": {
+          "type": "string",
+          "title": "实例状态不能为启动中（Starting）。重启实例后，重置生效，且必须是在ECS控制台重启或者调用API RebootInstance重启，新密码才能生效。在操作系统内部重启不能生效。"
+        },
+        "hostName": {
+          "type": "string",
+          "title": "操作系统的主机名"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "实例名称"
+        },
+        "description": {
+          "type": "string",
+          "title": "实例描述"
+        },
+        "securityGroupIds": {
+          "type": "string",
+          "title": "实例重新加入的安全组列表，安全组ID不能重复。以”,“分割"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "---------------harvester-----------------\nnamespace"
+        },
+        "cpu": {
+          "type": "string",
+          "title": "cpu"
+        },
+        "memory": {
+          "type": "string",
+          "title": "memory"
+        },
+        "isRestart": {
+          "type": "boolean",
+          "title": "修改配置后是否重启"
+        }
+      },
+      "title": "更新ECS入参"
+    },
+    "pbecsUpdateEcsResp": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/pbtenantCloudProvider",
+          "title": "云名称"
+        },
+        "accountName": {
+          "type": "string",
+          "title": "账户名称，根据config.yaml中的配置，默认为第一个配置的账户"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "区域Id，参考 tenant.proto 中的各个云的区域"
+        },
+        "requestId": {
+          "type": "string",
+          "title": "请求ID"
+        }
+      },
+      "title": "更新ECS返回值"
+    },
+    "pbtenantCloudProvider": {
+      "type": "string",
+      "enum": [
+        "ali",
+        "tencent",
+        "huawei",
+        "k8s",
+        "harvester"
+      ],
+      "default": "ali",
+      "description": "- ali: 0 - 阿里云\n - tencent: 1 - 腾讯云\n - huawei: 2 - 华为云\n - k8s: 3 - K8S\n - harvester: 3 - Harvester",
+      "title": "云提供商"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

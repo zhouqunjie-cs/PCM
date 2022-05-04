@@ -1,0 +1,430 @@
+syntax = "proto3";
+package pbecs;
+
+option go_package = "github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs";
+
+import "idl/pbtenant/tenant.proto";
+import "google/api/annotations.proto";
+
+//ECS 实例
+message EcsInstance {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 实例id
+  string instance_id = 3;
+  // 实例名称
+  string instance_name = 4;
+  // 地域，数据中心
+  string region_name = 5;
+  // 公网ip
+  repeated string public_ips = 6;
+  // 实例类型
+  string instance_type = 7;
+  // vcpu数
+  string cpu = 8;
+  // 内存MB
+  string memory = 9;
+  // 实例描述
+  string description = 10;
+  // 状态
+  string status = 11;
+  // 创建时间，ISO8601
+  string creation_time = 12;
+  // 过期时间
+  string expire_time = 13;
+  // 内网ip
+  repeated string inner_ips = 14;
+  // vpc id
+  string vpc_id = 15;
+  // 资源组id
+  string resource_group_id = 16;
+  // 收费类型
+  string instance_charge_type = 17;
+  // -----------harvester---------
+  //虚拟机所在的节点
+  string node = 18;
+  //namespace
+  string namespace = 20;
+}
+
+//网络计费类型
+enum InternetChargeType {
+  //按固定带宽计费。
+  PayByBandwidth = 0;
+  //（默认）：按使用流量计费
+  PayByTraffic = 1;
+}
+
+//创建多家云ECS入参
+message CreateEcsMultipleReq {
+  repeated CreateEcsReq createEcsReqs = 1;
+}
+//创建多家云ECS返回值
+message CreateEcsMultipleResp {
+  // 请求ID
+  repeated string request_id = 1;
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 2;
+}
+
+//创建ECS入参
+message CreateEcsReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 地域，数据中心
+  int32 region_id = 3;
+  //镜像id
+  string image_id = 4;
+  // 实例的付费方式
+  string instance_charge_type = 5;
+  //实例的资源规格
+  string instance_type = 6;
+  // 安全组id
+  string security_group_id = 7;
+  //交换机id
+  string v_switch_id = 8;
+  //实例名称
+  string instance_name = 9;
+  //实例描述
+  string description = 10;
+  //可用区id
+  string zone_id = 11;
+  //系统磁盘
+  SystemDisk system_disk = 12;
+  //创建ECS的数量
+  int32 amount = 13;
+  //预检此次请求,为true时请求通过，则返回 Request validation has been passed with DryRun flag set
+  string dry_run = 14;
+  //数据盘N的云盘种类。取值范围：cloud_efficiency：高效云盘；cloud_ssd：SSD云盘；cloud_essd：ESSD云盘；cloud：普通云盘。
+  string category = 15;
+  //网络计费类型。取值范围：PayByBandwidth：按固定带宽计费。PayByTraffic（默认）：按使用流量计费
+  InternetChargeType internet_charge_type = 16;
+  //公网入带宽最大值，单位为Mbit/s。创建的实例如果参数InternetMaxBandwidthOut的值大于0，则自动为实例分配公网IP。
+  int32 internet_max_bandwidth_out = 17;
+  // vpc id 华为云必需
+  string vpc_id = 18;
+  //待创建云服务器所在的子网信息。需要指定vpcid对应VPC下已创建的子网（subnet）的网络ID，UUID格式。华为云必需
+  string subnet_id = 19;
+  //-------------harvester---------------
+  //命名空间
+  string namespace = 20;
+  //vCpu
+  int32 cpu = 21;
+  //memory
+  string memory = 22;
+  //ssh_key
+  string ssh_key = 23;
+  //diskName
+  string disk_name = 24;
+  //disk类型 disk,cd-rom
+  string disk_type = 25;
+  //卷大小
+  string disk_size = 26;
+  //bus 总线指示要模拟的磁盘设备的类型，支持virtio, sata, scsi.
+  string bus = 27;
+  //网络名称
+  string network_name = 28;
+  //network_model 网络模式，支持e1000, e1000e, ne2k_pci, pcnet, rtl8139, virtio.
+  string network_model = 29;
+  //网络
+  string network = 30;
+  //网络连接方法，默认bridge
+  string network_type = 31;
+  //osType //系统类型
+  string os_type = 32;
+  //machineType //机器类型 none、q35、pc
+  string machine_type = 33;
+  //machineName //主机名称，默认为虚拟机名称
+  string machine_name = 34;
+  //userDataTemplate //用户数据模板
+  string user_data_template = 35;
+  //networkDataTemplate //网络数据模板
+  string network_data_template = 36;
+  //vmTemplateName //模板名称
+  string vm_template_name = 37;
+  //vmTemplateVersion //版本号
+  string vm_template_version = 38;
+}
+
+//系统磁盘
+message SystemDisk {
+  //系统盘大小，单位为GiB。取值范围：20~500。该参数的取值必须大于或者等于max{20, ImageSize}。默认值：max{40, 参数ImageId对应的镜像大小}
+  string size = 1;
+  //系统盘类型。系统盘的云盘种类。取值范围：cloud_efficiency：高效云盘。cloud_ssd：SSD云盘。cloud_essd：ESSD云盘。cloud：普通云盘。
+  string category = 2;
+  //系统盘名称
+  string disk_name = 3;
+  //系统盘描述
+  string description = 4;
+  //创建ESSD云盘作为系统盘使用时，设置云盘的性能等级。取值范围：PL0：单盘最高随机读写IOPS 1万。PL1（默认）：单盘最高随机读写IOPS 5万。PL2：单盘最高随机读写IOPS 10万。PL3：单盘最高随机读写IOPS 100万。
+  string performance_level = 5;
+  //系统盘采用的自动快照策略ID。
+  string auto_snapshot_policy_id = 6;
+}
+
+//创建ECS返回值
+message CreateEcsResp {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  // 请求ID
+  string request_id = 4;
+  // 订单id
+  string order_id = 5;
+  // 订单成交价
+  float trade_price = 6;
+  //实例ID（InstanceIdSet）列表
+  repeated string instance_id_sets = 7;
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 8;
+}
+
+//删除ECS入参
+message DeleteEcsReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 地域，数据中心
+  int32 region_id = 3;
+  //是否只预检此次请求是否只预检此次请求。true：发送检查请求，不会查询资源状况。检查项包括AccessKey是否有效、RAM用户的授权情况和是否填写了必需参数。如果检查不通过，则返回对应错误。如果检查通过，会返回错误码DRYRUN.SUCCESS。
+  //false（默认值）：发送正常请求，通过检查后返回2XX HTTP状态码并直接查询资源状况。
+  string dry_run = 4;
+  //Force是否强制释放**运行中**；true：强制释放运行中（Running）的实例。强制释放相当于断电，实例内存以及存储中的临时数据都会被擦除，无法恢复。
+  //false（默认值）：正常释放实例，此时实例必须处于已停止（Stopped）状态
+  string force = 5;
+  //是否释放已到期的包年包月实例 true,false
+  string terminate_subscription = 6;
+  //实例ID数组以”,“分割。列：i-8vb2nlubkow0fxbq2218,i-8vb2nlubkow0fxbq2216
+  string instance_ids = 7;
+  //配置删除云服务器是否删除云服务器绑定的弹性IP。如果选择不删除，则系统仅做解绑定操作，保留弹性IP资源。
+  //取值为true或false。默认false；华为云
+  string delete_publicip = 8;
+  //配置删除云服务器是否删除云服务器对应的数据盘，如果选择不删除，则系统仅做卸载操作，保留云硬盘资源。默认为false。
+  //取值为true或false。默认false；华为云
+  string delete_volume = 9;
+  //----------------harvester----------------
+  //虚拟机名称
+  string instance_name = 10;
+  //namespace
+  string namespace = 11;
+  //diskName,以“,” 分割
+  string disk_name = 12;
+}
+
+//删除ECS返回值
+message DeleteEcsResp {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  // 请求ID
+  string request_id = 4;
+}
+
+//更新ECS入参
+message UpdateEcsReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 地域，数据中心
+  int32 region_id = 3;
+  //实例id
+  string instance_ids = 4;
+  // 实例状态不能为启动中（Starting）。重启实例后，重置生效，且必须是在ECS控制台重启或者调用API RebootInstance重启，新密码才能生效。在操作系统内部重启不能生效。
+  string password = 5;
+  //操作系统的主机名
+  string host_name = 6;
+  //实例名称
+  string instance_name = 7;
+  //实例描述
+  string description = 8;
+  //实例重新加入的安全组列表，安全组ID不能重复。以”,“分割
+  string security_group_ids = 9;
+  //---------------harvester-----------------
+  //namespace
+  string namespace = 10;
+  //cpu
+  string cpu = 11;
+  //memory
+  string memory = 12;
+  //修改配置后是否重启
+  bool is_restart = 13;
+}
+
+//更新ECS返回值
+message UpdateEcsResp {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  // 请求ID
+  string request_id = 4;
+}
+
+//查询ECS入参
+message ListDetailReq {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  // 分页相关参数，页码
+  int32 page_number = 4;
+  // 分页相关参数，每页数量
+  int32 page_size = 5;
+  // 分页相关参数，下一页的token
+  string next_token = 6;
+  //--------harvester---------
+  //namespace
+  string namespace = 7;
+}
+
+//查询ECS返回值
+message ListDetailResp {
+  // Ecs 机器集合
+  repeated EcsInstance ecses = 1;
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 2;
+  // 分页相关参数，页码
+  int32 page_number = 3;
+  // 分页相关参数，每页数量
+  int32 page_size = 4;
+  // 分页相关参数，下一页的token
+  string next_token = 5;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  string request_id = 6;
+}
+
+//虚拟机状态操作
+enum ActionType {
+  //启动
+  start = 0;
+  //停止
+  stop = 1;
+  //重启
+  restart = 2;
+}
+
+message ActionReq {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  //命名空间
+  string namespace = 4;
+  //虚拟机名称
+  string vm_name = 5 ;
+  //虚拟机操作状态
+  ActionType action_type = 6 ;
+}
+
+message ActionResp {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // Ecs 机器集合
+  repeated EcsInstance ecses = 3;
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 4;
+  //vm状态
+  string status = 5;
+}
+
+message ListReq {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+}
+
+message ListResp {
+  // Ecs 机器集合
+  repeated EcsInstance ecses = 1;
+}
+
+message ListAllReq{}
+
+
+// ECS类产品接口
+// 阿里云 - ECS
+// 腾讯云 - CVM
+// 华为云 - ECS
+// 亚马逊云 - EC2
+service EcsService {
+
+  // 创建多家云ECS
+  rpc CreateMultipleEcs(CreateEcsMultipleReq) returns (CreateEcsMultipleResp) {
+    option (google.api.http) = {
+      post : "/apis/ecs/createMultiple"
+      body : "*"
+    };
+  }
+
+  // 创建ECS
+  rpc CreateEcs(CreateEcsReq) returns (CreateEcsResp) {
+    option (google.api.http) = {
+      post : "/apis/ecs/create"
+      body : "*"
+    };
+  }
+
+  // 删除ECS
+  rpc DeleteEcs(DeleteEcsReq) returns (DeleteEcsResp) {
+    option (google.api.http) = {
+      post : "/apis/ecs/delete"
+      body : "*"
+    };
+  }
+
+  // 修改ECS
+  rpc UpdateEcs(UpdateEcsReq) returns (UpdateEcsResp) {
+    option (google.api.http) = {
+      put : "/apis/ecs/update"
+      body : "*"
+    };
+  }
+
+  // 查询ECS明细 - 支持云类型、区域、账户、分页等过滤条件
+  rpc ListEcsDetail(ListDetailReq) returns (ListDetailResp) {
+    option (google.api.http) = {
+      get : "/apis/ecs/detail"
+    };
+  }
+
+  // 查询ECS全量 - 根据云类型
+  rpc ListEcs(ListReq) returns (ListResp) {
+    option (google.api.http) = {
+      get : "/apis/ecs"
+    };
+  }
+
+  // 查询所有云的ECS
+  rpc ListEcsAll(ListAllReq) returns (ListResp) {
+    option (google.api.http) = {
+      get : "/apis/ecs/all"
+    };
+  }
+
+  //操作ecs(start-stop-restart)
+  rpc ActionEcs(ActionReq) returns (ActionResp){
+    option (google.api.http) = {
+      post : "/apis/ecs/action"
+      body : "*"
+    };
+  }
+}

@@ -1,0 +1,280 @@
+syntax = "proto3";
+package pbpod;
+
+option go_package = "github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod";
+
+import "idl/pbtenant/tenant.proto";
+import "google/api/annotations.proto";
+
+message PodInstance {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 实例id
+  string pod_id = 3;
+  // 实例名称
+  string pod_name = 4;
+  // 地域ID
+  int32 region_id = 5;
+  // 地域Name
+  string region_name = 6;
+  // 镜像
+  string container_image = 7;
+  // 容器名称
+  string container_name = 8;
+  // vcpu数
+  string cpu_pod = 9;
+  // 内存MB
+  string memory_pod = 10;
+  //安全组ID                  对应腾讯 SecurityGroupIds(腾讯必需)
+  string security_group_id = 11;
+  //子网ID                    对应腾讯 SubnetId(腾讯必需)
+  string subnet_id = 12;
+  //VPC ID                   对应腾讯 VpcId(腾讯必需)
+  string vpc_id = 13;
+  //名空间
+  string namespace = 14;
+  // 实例状态
+  string status = 15;
+}
+
+
+message CreatePodsReq {
+  // 创建请求集合
+  repeated CreatePodReq createPodReq = 1;
+}
+
+message CreatePodsResp {
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 2;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  repeated string request_id = 3;
+}
+
+message CreatePodReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 实例id
+  string pod_id = 3;
+  // 实例名称
+  string pod_name = 4;
+  // 地域，数据中心
+  int32 region_id = 5;
+  // 镜像
+  string container_image = 6;
+  // 容器名称
+  string container_name = 7;
+  // v cpu数
+  string cpu_pod = 8;
+  // 内存MB
+  string memory_pod = 9;
+  //安全组ID                  对应腾讯 SecurityGroupIds(腾讯必需)
+  string security_group_id = 10;
+  //子网ID                    对应腾讯 SubnetId(腾讯必需)
+  string subnet_id = 11;
+  //VPC ID                   对应腾讯 VpcId(腾讯必需)
+  string vpc_id = 12;
+  //名空间
+  string namespace = 13;
+}
+
+message CreatePodResp {
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 1;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  string request_id = 2;
+  // podId
+  string pod_id = 3;
+  // podName
+  string pod_name = 4;
+}
+
+message DeletePodReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 实例ID
+  string pod_id = 3;
+  // 实例名称
+  string pod_name = 4;
+  //namespace
+  string namespace = 5;
+  // 地域，数据中心
+  int32 region_id = 6;
+}
+
+message DeletePodResp {
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 1;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  string request_id = 2;
+  // podId
+  string pod_id = 3;
+  // podName
+  string pod_name = 4;
+}
+
+message UpdatePodReq {
+  // 云类型
+  pbtenant.CloudProvider provider = 1;
+  // 账号名称
+  string account_name = 2;
+  // 实例ID
+  string pod_id = 3;
+  // 实例名称
+  string pod_name = 4;
+  //namespace
+  string namespace = 5;
+  // 地域，数据中心
+  int32 region_id = 6;
+  // 镜像
+  string container_image = 7;
+  // 容器名称
+  string container_name = 8;
+  // v cpu数
+  string cpu_pod = 9;
+  // 内存MB
+  string memory_pod = 10;
+  // 重启策略
+  string restart_policy = 11;
+  // labels
+  string labels = 12;
+}
+
+message UpdatePodResp {
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 1;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  string request_id = 2;
+  // podId
+  string pod_id = 3;
+  // podName
+  string pod_name = 4;
+}
+
+message ListPodDetailReq {
+  // 云名称
+  pbtenant.CloudProvider provider = 1;
+  // 账户名称，根据config.yaml中的配置，默认为第一个配置的账户
+  string account_name = 2;
+  // 区域Id，参考 tenant.proto 中的各个云的区域
+  int32 region_id = 3;
+  // 区域名称，各云厂商自定义的region name
+  int32 region_name = 4;
+  // podID
+  int32 pod_id = 5;
+  // 分页相关参数，页码
+  int32 page_number = 6;
+  // 分页相关参数，每页数量
+  int32 page_size = 7;
+  // 分页相关参数，下一页的token
+  string next_token = 8;
+  // namespace
+  string namespace = 9;
+}
+
+message ListPodDetailResp {
+  // Pod集合
+  repeated PodInstance pods = 1;
+  // 查询是否完成，如果为否-false，则可以将下面三个分页参数填入到请求中，继续查询
+  bool finished = 2;
+  // 分页相关参数，页码
+  int32 page_number = 3;
+  // 分页相关参数，每页数量
+  int32 page_size = 4;
+  // 分页相关参数，下一页的token
+  string next_token = 5;
+  // 请求id，出现问题后提供给云厂商，排查问题
+  string request_id = 6;
+}
+
+message ListPodReq {
+  // cloud name
+  pbtenant.CloudProvider provider = 1;
+  //
+  string namespace = 2;
+}
+
+message ListPodResp {
+  // pod list
+  repeated PodInstance pods = 1;
+}
+
+message GetPodRegionReq {
+  // cloud name
+  pbtenant.CloudProvider provider = 1;
+
+}
+
+message GetPodRegionResp {
+  // region list
+  repeated pbtenant.Region regions = 1;
+}
+
+
+message ListPodAllReq{}
+
+// Pod类产品接口
+// 阿里云 - ECI
+// 腾讯云 - TKS
+// 华为云 - CCI
+
+service PodService {
+
+  // 创建Pods
+  rpc CreatePods(CreatePodsReq) returns (CreatePodsResp) {
+    option (google.api.http) = {
+      post : "/apis/pod/createMulti"
+      body : "*"
+    };
+  }
+
+  // 创建Pod
+  rpc CreatePod(CreatePodReq) returns (CreatePodResp) {
+    option (google.api.http) = {
+      post : "/apis/pod/create"
+      body : "*"
+    };
+  }
+
+  // 删除Pod
+  rpc DeletePod(DeletePodReq) returns (DeletePodResp) {
+    option (google.api.http) = {
+      post : "/apis/pod/delete"
+      body : "*"
+    };
+  }
+
+  // 更新Pod
+  rpc UpdatePod(UpdatePodReq) returns (UpdatePodResp) {
+    option (google.api.http) = {
+      put : "/apis/pod/update"
+      body : "*"
+    };
+  }
+
+  // 查询Pod明细
+  rpc ListPodDetail(ListPodDetailReq) returns (ListPodDetailResp) {
+    option (google.api.http) = {
+      get : "/apis/pod/detail"
+    };
+  }
+
+  // 查询Pod全量 - 根据云类型
+  rpc ListPod(ListPodReq) returns (ListPodResp) {
+    option (google.api.http) = {
+      get : "/apis/pod"
+    };
+  }
+
+  // 查询所有云的Pod
+  rpc ListPodAll(ListPodAllReq) returns (ListPodResp) {
+    option (google.api.http) = {
+      get : "/apis/pod/all"
+    };
+  }
+}

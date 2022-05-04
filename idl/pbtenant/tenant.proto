@@ -1,0 +1,181 @@
+syntax = "proto3";
+package pbtenant;
+
+option go_package = "github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant";
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// 云提供商
+enum CloudProvider {
+  // 0 - 阿里云
+  ali = 0;
+  // 1 - 腾讯云
+  tencent = 1;
+  // 2 - 华为云
+  huawei = 2;
+  // 3 - K8S
+  k8s = 3;
+  // 3 - Harvester
+  harvester = 4;
+}
+
+// 云产品
+enum CloudProduct {
+  // 0 - 所有产品
+  product_all = 0;
+  // 1 - ECS类产品：阿里云ECS,腾讯云CVM，华为云ECS，亚马逊EC2
+  product_ecs = 1;
+  // 2 - RDS类产品：阿里云RDS,腾讯云CDB
+  product_rds = 2;
+  // 3 - Domain类产品：阿里云Domain
+  product_domain = 3;
+  // 4 - OSS类产品：阿里云OSS
+  product_oss = 4;
+  // 5 - POD类产品：阿里云ECI，华为云CCI，腾讯云EKS
+  product_pod = 5;
+}
+
+// 云配置信息
+message CloudConfigs {
+  // 云配置
+  repeated CloudConfig configs = 1;
+}
+
+message CloudConfig {
+  // 云服务提供商，具体参考 CloudProvider 的定义
+  CloudProvider provider = 1;
+  // 账户名称，由用户自定义，必须全局唯一，方便多个系统之间的维护
+  string name = 2;
+  // 认证方式1：与 access_secret 结合使用，两者均非空时生效
+  string access_id = 3;
+  // 认证方式1：与 access_id 结合使用，两者均非空时生效
+  string access_secret = 4;
+  // 如果是私有云，需要提供URL
+  string url = 5;
+  // 如果是私有云，需要提供URL
+  string token = 6;
+}
+
+
+message Region {
+  //id
+  int32 id = 1;
+  //name
+  string name = 2;
+}
+
+
+// 阿里云区域，需要将对应的 _ 转化为 -
+enum AliRegionId {
+  ali_all = 0;
+  ali_cn_qingdao = 1;      // 青岛
+  ali_cn_beijing = 2;      // 北京
+  ali_cn_zhangjiakou = 3;  // 张家口
+  ali_cn_huhehaote = 4;    // 呼和浩特
+  ali_cn_wulanchabu = 5;   // 乌兰察布
+  ali_cn_hangzhou = 6;     // 杭州
+  ali_cn_shanghai = 7;     // 上海
+  ali_cn_shenzhen = 8;     // 深圳
+  ali_cn_heyuan = 9;       // 河源
+  ali_cn_guangzhou = 10;   // 广州
+  ali_cn_chengdu = 11;     // 成都
+  ali_cn_hongkong = 12;    // 中国香港-香港
+  ali_ap_southeast_1 = 13; // 亚太东南1-新加坡
+  ali_ap_southeast_2 = 14; // 亚太东南2-悉尼
+  ali_ap_southeast_3 = 15; // 亚太东南3-吉隆坡
+  ali_ap_southeast_5 = 16; // 亚太东南5-雅加达
+  ali_ap_south_1 = 17;     // 亚太南部1-孟买
+  ali_ap_northeast_1 = 18; // 亚太东北1-东京
+  ali_us_west_1 = 19;      // 美国西部1-硅谷
+  ali_us_east_1 = 20;      // 美国东部1-弗吉尼亚
+  ali_eu_central_1 = 21;   // 欧洲中部1-法兰克福
+  ali_eu_west_1 = 22;      // 英国（伦敦）-伦敦
+}
+
+// 腾讯云区域，需要将对应的 _ 转化为 -
+enum TencentRegionId {
+  tc_all = 0;
+  tc_ap_bangkok = 1; //亚太东南(曼谷)
+  tc_ap_beijing = 2; //华北地区(北京)
+  tc_ap_chengdu = 3; //西南地区(成都)
+  tc_ap_chongqing = 4; //西南地区(重庆)
+  tc_ap_guangzhou = 5; //华南地区(广州)
+  tc_ap_hongkong = 6;  //港澳台地区(中国香港)
+  tc_ap_jakarta = 7; //亚太东南（雅加达）
+  tc_ap_mumbai = 8; // 亚太南部(孟买)
+  tc_ap_nanjing = 9; //华东地区(南京)
+  tc_ap_seoul = 10;  //亚太东北(首尔)
+  tc_ap_shanghai = 11; //华东地区(上海)
+  tc_ap_shanghai_fsi = 12; //华东地区(上海金融)
+  tc_ap_shenzhen_fsi = 13; //华南地区(深圳金融)
+  tc_ap_singapore = 14;  //亚太东南(新加坡)
+  tc_ap_tokyo = 15;  //亚太东北(东京)
+  tc_eu_frankfurt = 16;  //欧洲地区(法兰克福)
+  tc_eu_moscow = 17; //欧洲地区(莫斯科)
+  tc_na_ashburn = 18;  //美国东部(弗吉尼亚)
+  tc_na_siliconvalley = 19;  //美国西部(硅谷)
+  tc_na_toronto = 20;  //北美地区(多伦多)
+  tc_sa_saopaulo = 21; //南美地区（圣保罗）
+}
+
+// 华为云区域，需要将对应的 _ 转化为 -
+enum HuaweiRegionId {
+  hw_all = 0;
+  hw_cn_north_1 = 1; // 华北-北京一
+  hw_cn_north_4 = 2; // 华北-北京四
+  hw_cn_south_1 = 3; // 华南-广州
+  hw_cn_east_2 = 4; // 华东-上海二
+  hw_cn_east_3 = 5; // 华东-上海一
+  hw_cn_southwest_2 = 6; // 西南-贵阳一
+  hw_ap_southeast_1 = 7; // 中国-香港
+  hw_ap_southeast_2 = 8; // 亚太-曼谷
+  hw_ap_southeast_3 = 9; // 亚太-新加坡
+  hw_af_south_1 = 10; //非洲-约翰内斯堡
+  hw_cn_south_2 = 11; // 华南-深圳
+}
+
+
+// 私有云区域 预留
+enum K8SRegionId {
+  k8s_all = 0;
+}
+
+
+// 亚马逊云区域，需要将对应的 _ 转化为 -
+enum AwsRegionId {
+  aws_all = 0;
+  aws_us_east_2 = 1; // US East (Ohio)
+  aws_us_east_1 = 2; // US East (N. Virginia)
+  aws_us_west_1 = 3; // US West (N. California)
+  aws_us_west_2 = 4; // US West (Oregon)
+  aws_af_south_1 = 5; // Africa (Cape Town)
+  aws_ap_east_1 = 6; // Asia Pacific (Hong Kong)
+  aws_ap_south_1 = 7; // Asia Pacific (Mumbai)
+  aws_ap_northeast_3 = 8; // Asia Pacific (Osaka)
+  aws_ap_northeast_2 = 9; // Asia Pacific (Seoul)
+  aws_ap_northeast_1 = 10; // Asia Pacific (Singapore)
+  aws_ap_southeast_2 = 11; // Asia Pacific (Sydney)
+  aws_ap_southeast_1 = 12; // Asia Pacific (Tokyo)
+  aws_ca_central_1 = 13; // Canada (Central)
+  aws_eu_central_1 = 14; // Europe (Frankfurt)
+  aws_eu_west_1 = 15; // Europe (Ireland)
+  aws_eu_west_2 = 16; // Europe (London)
+  aws_eu_south_1 = 17; // Europe (Milan)
+  aws_eu_west_3 = 18; // Europe (Paris)
+  aws_eu_north_1 = 19; // Europe (Stockholm)
+  aws_me_south_1 = 20; // Middle East (Bahrain)
+  aws_sa_east_1 = 21; // South America (São Paulo)
+}
+
+service TenantService {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    description : "所有云租户的认证服务"
+    external_docs : {
+      url : "https://github.com/JCCE-nudt/PCM"
+      description: "Find out more about PCM"
+    }
+  };
+
+}

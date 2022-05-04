@@ -1,0 +1,24 @@
+version: v1
+plugins:
+  - name: go
+    out: lan_trans
+    opt:
+      - paths=source_relative
+  #  - name: java
+  #    out: lan_trans
+  #    opt:
+  #      - paths=source_relative
+  - name: go-grpc
+    out: lan_trans
+    opt:
+      - paths=source_relative
+  #  - name: java-grpc
+  #    out: gen
+  #    opt:
+  #      - paths=source_relative
+  - name: grpc-gateway
+    out: lan_trans
+    opt:
+      - paths=source_relative
+  - name: openapiv2
+    out: lan_trans/openapiv2
