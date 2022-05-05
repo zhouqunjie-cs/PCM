@@ -4,9 +4,6 @@ import (
 	"context"
 	"sync"
 
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
 	openapi "github.com/alibabacloud-go/darabonba-openapi/client"
 	string_ "github.com/alibabacloud-go/darabonba-string/client"
 	aliecs "github.com/alibabacloud-go/ecs-20140526/v2/client"
@@ -14,6 +11,9 @@ import (
 	"github.com/alibabacloud-go/tea/tea"
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 )
 
 var aliClientMutex sync.Mutex

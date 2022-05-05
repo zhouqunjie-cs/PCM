@@ -2,7 +2,7 @@ package tenanter
 
 import (
 	"encoding/json"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 	"io/ioutil"
 	"os"
 	"sync"

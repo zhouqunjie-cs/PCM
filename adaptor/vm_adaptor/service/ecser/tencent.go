@@ -4,9 +4,6 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
 	string_ "github.com/alibabacloud-go/darabonba-string/client"
 	util "github.com/alibabacloud-go/tea-utils/service"
 	"github.com/alibabacloud-go/tea/tea"
@@ -15,6 +12,9 @@ import (
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 	cvm "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cvm/v20170312"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 )
 
 type TencentCvm struct {

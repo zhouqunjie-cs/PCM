@@ -12,16 +12,16 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 
 	corev1 "k8s.io/api/core/v1"
 	huaweicci "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 
-	"github.com/JCCE-nudt/PCM/common/tenanter"
 	"github.com/pkg/errors"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
 )
 
 var huaweiClientMutex sync.Mutex

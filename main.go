@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/JCCE-nudt/PCM/common/server"
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/demo"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
+	"github.com/zhouqunjie-cs/PCM/common/server"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/demo"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
 	"net"
 	"net/http"
 

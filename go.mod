@@ -1,4 +1,4 @@
-module github.com/JCCE-nudt/PCM
+module github.com/zhouqunjie-cs/PCM
 
 go 1.17
 

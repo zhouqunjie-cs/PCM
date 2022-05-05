@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/JCCE-nudt/PCM/adaptor/pod_adaptor/service/poder"
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/adaptor/pod_adaptor/service/poder"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 
 	"github.com/golang/glog"
 	"github.com/pkg/errors"

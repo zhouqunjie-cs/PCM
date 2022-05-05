@@ -3,7 +3,7 @@ package tenanter
 import (
 	"testing"
 
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 )
 
 func TestGetAllRegionIds(t *testing.T) {

@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	"github.com/JCCE-nudt/PCM/adaptor/pod_adaptor/server/pod"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
+	"github.com/zhouqunjie-cs/PCM/adaptor/pod_adaptor/server/pod"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
 
 	"github.com/golang/glog"
 	"google.golang.org/grpc/codes"

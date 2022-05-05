@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	"github.com/JCCE-nudt/PCM/adaptor/vm_adaptor/server/ecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/adaptor/vm_adaptor/server/ecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
 
 	"github.com/golang/glog"
 	"google.golang.org/grpc/codes"

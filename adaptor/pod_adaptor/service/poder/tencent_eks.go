@@ -7,14 +7,14 @@ import (
 
 	"github.com/golang/glog"
 
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
 	"github.com/pkg/errors"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 	tencenteks "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tke/v20180525"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
 )
 
 var tencentClientMutex sync.Mutex

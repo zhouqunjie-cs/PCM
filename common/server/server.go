@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/demo"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbpod"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/demo"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbpod"
 )
 
 type Server struct {

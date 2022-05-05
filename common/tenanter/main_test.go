@@ -1,7 +1,7 @@
 package tenanter
 
 import (
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 	"os"
 	"testing"
 )

@@ -10,10 +10,10 @@ package ecser
 //	awsec2 "github.com/aws/aws-sdk-go-v2/service/ec2"
 //	"github.com/pkg/errors"
 //
-//	"github.com/JCCE-nudt/PCM/common/tenanter"
+//	"github.com/zhouqunjie-cs/PCM/common/tenanter"
 //
-//	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-//	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+//	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+//	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 //)
 //
 //type AwsEcs struct {

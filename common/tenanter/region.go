@@ -3,7 +3,7 @@ package tenanter
 import (
 	"strings"
 
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 
 	"github.com/pkg/errors"
 )

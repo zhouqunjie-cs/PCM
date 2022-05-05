@@ -1,7 +1,7 @@
 syntax = "proto3";
 package pbecs;
 
-option go_package = "github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs";
+option go_package = "github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs";
 
 import "idl/pbtenant/tenant.proto";
 import "google/api/annotations.proto";

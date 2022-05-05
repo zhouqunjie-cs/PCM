@@ -4,9 +4,6 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/JCCE-nudt/PCM/common/tenanter"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbecs"
-	"github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
 	string_ "github.com/alibabacloud-go/darabonba-string/client"
 	util "github.com/alibabacloud-go/tea-utils/service"
 	"github.com/alibabacloud-go/tea/tea"
@@ -19,6 +16,9 @@ import (
 	iammodel "github.com/huaweicloud/huaweicloud-sdk-go-v3/services/iam/v3/model"
 	iamregion "github.com/huaweicloud/huaweicloud-sdk-go-v3/services/iam/v3/region"
 	"github.com/pkg/errors"
+	"github.com/zhouqunjie-cs/PCM/common/tenanter"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbecs"
+	"github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 )
 
 type HuaweiEcs struct {

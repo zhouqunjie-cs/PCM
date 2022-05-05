@@ -7,7 +7,7 @@
 package pbpod
 
 import (
-	pbtenant "github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant"
+	pbtenant "github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package pbtenant;
 
-option go_package = "github.com/JCCE-nudt/PCM/lan_trans/idl/pbtenant";
+option go_package = "github.com/zhouqunjie-cs/PCM/lan_trans/idl/pbtenant";
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
@@ -173,7 +173,7 @@ service TenantService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
     description : "所有云租户的认证服务"
     external_docs : {
-      url : "https://github.com/JCCE-nudt/PCM"
+      url : "https://github.com/zhouqunjie-cs/PCM"
       description: "Find out more about PCM"
     }
   };
